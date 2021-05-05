@@ -20,6 +20,7 @@ import {useTranslation} from 'react-i18next'
 import {FlexboxGrid, Input, InputGroup, Icon, IconButton, Table, Modal, Button} from 'rsuite'
 import {DEFAULT_TABLE_PAGE_SIZES, mapTableSortTypeToGraphQLSortOrder} from '../utility'
 import {ArticlePreviewLinkPanel} from '../panel/articlePreviewLinkPanel'
+import GuideTour from '../atoms/tour'
 const {Column, HeaderCell, Cell, Pagination} = Table
 
 enum ConfirmAction {
@@ -103,6 +104,7 @@ export function ArticleList() {
         </FlexboxGrid.Item>
         <FlexboxGrid.Item colspan={8} style={{textAlign: 'right'}}>
           <ButtonLink
+            className="addAuthorButton"
             appearance="primary"
             disabled={isLoading}
             route={ArticleCreateRoute.create({})}>
@@ -392,6 +394,14 @@ export function ArticleList() {
           </Button>
         </Modal.Footer>
       </Modal>
+      <GuideTour
+        steps={[
+          {
+            content: 'Double click or press enter on this cell to open the DropDownEditor',
+            target: '.addAuthorButton'
+          }
+        ]}
+      />
     </>
   )
 }
