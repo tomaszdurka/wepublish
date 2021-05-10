@@ -38,6 +38,7 @@ import {useUnsavedChangesDialog} from '../unsavedChangesDialog'
 import {BlockMap} from '../blocks/blockMap'
 
 import {useTranslation} from 'react-i18next'
+import GuideTour from '../atoms/tour'
 
 export interface ArticleEditorProps {
   readonly id?: string
@@ -48,7 +49,7 @@ const InitialArticleBlocks: BlockValue[] = [
   {key: '1', type: BlockType.Image, value: {image: null, caption: ''}}
 ]
 
-export function ArticleEditor({id}: ArticleEditorProps) {
+export function ArticleEditor(this: any, {id}: ArticleEditorProps) {
   const {t} = useTranslation()
 
   const dispatch = useRouteDispatch()
@@ -463,6 +464,27 @@ export function ArticleEditor({id}: ArticleEditorProps) {
           }}
         />
       </Modal>
+      <GuideTour
+        steps={[
+          {
+            content: 'Learn about the Article Editor',
+            target: 'body',
+            placement: 'center',
+            disableBeacon: true
+          },
+          {
+            content: 'Click here to add blocks to your article',
+            target: '.rs-icon-plus',
+            disableBeacon: false,
+            isFixed: true
+          },
+          {
+            content: 'Step 3',
+            target: '.rs-dropdown-item',
+            disableBeacon: false
+          }
+        ]}
+      />
     </>
   )
 }
