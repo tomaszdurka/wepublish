@@ -30,6 +30,7 @@ import {
 } from 'rsuite'
 import {DescriptionList, DescriptionListItem} from '../atoms/descriptionList'
 import {DEFAULT_TABLE_PAGE_SIZES, mapTableSortTypeToGraphQLSortOrder} from '../utility'
+import {IconButtonTooltip} from '../atoms/iconButtonTooltip'
 
 const {Column, HeaderCell, Cell, Pagination} = Table
 
@@ -182,16 +183,18 @@ export function AuthorList() {
             <Cell style={{padding: '6px 0'}}>
               {(rowData: FullAuthorFragment) => (
                 <>
-                  <IconButton
-                    icon={<Icon icon="trash" />}
-                    circle
-                    size="sm"
-                    style={{marginLeft: '5px'}}
-                    onClick={() => {
-                      setConfirmationDialogOpen(true)
-                      setCurrentAuthor(rowData)
-                    }}
-                  />
+                  <IconButtonTooltip caption={t('authors.overview.delete')}>
+                    <IconButton
+                      icon={<Icon icon="trash" />}
+                      circle
+                      size="sm"
+                      style={{marginLeft: '5px'}}
+                      onClick={() => {
+                        setConfirmationDialogOpen(true)
+                        setCurrentAuthor(rowData)
+                      }}
+                    />
+                  </IconButtonTooltip>
                 </>
               )}
             </Cell>

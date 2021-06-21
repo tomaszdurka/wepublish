@@ -31,6 +31,7 @@ import {
 } from 'rsuite'
 import {DescriptionList, DescriptionListItem} from '../atoms/descriptionList'
 import {DEFAULT_TABLE_PAGE_SIZES, mapTableSortTypeToGraphQLSortOrder} from '../utility'
+import {IconButtonTooltip} from '../atoms/iconButtonTooltip'
 
 const {Column, HeaderCell, Cell, Pagination} = Table
 
@@ -187,26 +188,30 @@ export function UserList() {
             <Cell style={{padding: '6px 0'}}>
               {(rowData: FullUserFragment) => (
                 <>
-                  <IconButton
-                    icon={<Icon icon="key" />}
-                    circle
-                    size="sm"
-                    style={{marginLeft: '5px'}}
-                    onClick={e => {
-                      setCurrentUser(rowData)
-                      setIsResetUserPasswordOpen(true)
-                    }}
-                  />
-                  <IconButton
-                    icon={<Icon icon="trash" />}
-                    circle
-                    size="sm"
-                    style={{marginLeft: '5px'}}
-                    onClick={() => {
-                      setConfirmationDialogOpen(true)
-                      setCurrentUser(rowData)
-                    }}
-                  />
+                  <IconButtonTooltip caption={t('userList.overview.resetPassword')}>
+                    <IconButton
+                      icon={<Icon icon="key" />}
+                      circle
+                      size="sm"
+                      style={{marginLeft: '5px'}}
+                      onClick={e => {
+                        setCurrentUser(rowData)
+                        setIsResetUserPasswordOpen(true)
+                      }}
+                    />
+                  </IconButtonTooltip>
+                  <IconButtonTooltip caption={t('userList.overview.delete')}>
+                    <IconButton
+                      icon={<Icon icon="trash" />}
+                      circle
+                      size="sm"
+                      style={{marginLeft: '5px'}}
+                      onClick={() => {
+                        setConfirmationDialogOpen(true)
+                        setCurrentUser(rowData)
+                      }}
+                    />
+                  </IconButtonTooltip>
                 </>
               )}
             </Cell>

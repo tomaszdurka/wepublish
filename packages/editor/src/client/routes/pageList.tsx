@@ -18,6 +18,7 @@ import {FlexboxGrid, Input, InputGroup, Icon, Table, IconButton, Modal, Button} 
 
 import {DescriptionList, DescriptionListItem} from '../atoms/descriptionList'
 import {DEFAULT_TABLE_PAGE_SIZES, mapTableSortTypeToGraphQLSortOrder} from '../utility'
+import {IconButtonTooltip} from '../atoms/iconButtonTooltip'
 
 const {Column, HeaderCell, Cell, Pagination} = Table
 
@@ -189,39 +190,45 @@ export function PageList() {
               {(rowData: PageRefFragment) => (
                 <>
                   {rowData.published && (
+                    <IconButtonTooltip caption={t('pages.overview.unpublish')}>
+                      <IconButton
+                        icon={<Icon icon="btn-off" />}
+                        circle
+                        size="sm"
+                        onClick={e => {
+                          setCurrentPage(rowData)
+                          setConfirmAction(ConfirmAction.Unpublish)
+                          setConfirmationDialogOpen(true)
+                        }}
+                      />
+                    </IconButtonTooltip>
+                  )}
+                  <IconButtonTooltip caption={t('pages.overview.delete')}>
                     <IconButton
-                      icon={<Icon icon="btn-off" />}
+                      icon={<Icon icon="trash" />}
                       circle
                       size="sm"
-                      onClick={e => {
+                      style={{marginLeft: '5px'}}
+                      onClick={() => {
                         setCurrentPage(rowData)
-                        setConfirmAction(ConfirmAction.Unpublish)
+                        setConfirmAction(ConfirmAction.Delete)
                         setConfirmationDialogOpen(true)
                       }}
                     />
-                  )}
-                  <IconButton
-                    icon={<Icon icon="trash" />}
-                    circle
-                    size="sm"
-                    style={{marginLeft: '5px'}}
-                    onClick={() => {
-                      setCurrentPage(rowData)
-                      setConfirmAction(ConfirmAction.Delete)
-                      setConfirmationDialogOpen(true)
-                    }}
-                  />
-                  <IconButton
-                    icon={<Icon icon="copy" />}
-                    circle
-                    size="sm"
-                    style={{marginLeft: '5px'}}
-                    onClick={() => {
-                      setCurrentPage(rowData)
-                      setConfirmAction(ConfirmAction.Duplicate)
-                      setConfirmationDialogOpen(true)
-                    }}
-                  />
+                  </IconButtonTooltip>
+                  <IconButtonTooltip caption={t('pages.overview.copy')}>
+                    <IconButton
+                      icon={<Icon icon="copy" />}
+                      circle
+                      size="sm"
+                      style={{marginLeft: '5px'}}
+                      onClick={() => {
+                        setCurrentPage(rowData)
+                        setConfirmAction(ConfirmAction.Duplicate)
+                        setConfirmationDialogOpen(true)
+                      }}
+                    />
+                  </IconButtonTooltip>
                 </>
               )}
             </Cell>

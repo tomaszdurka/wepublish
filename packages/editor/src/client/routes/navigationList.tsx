@@ -29,6 +29,7 @@ import {NavigationEditPanel} from '../panel/navigationEditPanel'
 import {RouteActionType} from '@karma.run/react'
 
 import {useTranslation} from 'react-i18next'
+import {IconButtonTooltip} from '../atoms/iconButtonTooltip'
 const {Column, HeaderCell, Cell /*, Pagination */} = Table
 
 export function NavigationList() {
@@ -117,16 +118,18 @@ export function NavigationList() {
           <Cell style={{padding: '6px 0'}}>
             {(rowData: FullNavigationFragment) => (
               <>
-                <IconButton
-                  icon={<Icon icon="trash" />}
-                  circle
-                  size="sm"
-                  style={{marginLeft: '5px'}}
-                  onClick={() => {
-                    setCurrentNavigation(rowData)
-                    setConfirmationDialogOpen(true)
-                  }}
-                />
+                <IconButtonTooltip caption={t('navigation.overview.delete')}>
+                  <IconButton
+                    icon={<Icon icon="trash" />}
+                    circle
+                    size="sm"
+                    style={{marginLeft: '5px'}}
+                    onClick={() => {
+                      setCurrentNavigation(rowData)
+                      setConfirmationDialogOpen(true)
+                    }}
+                  />
+                </IconButtonTooltip>
               </>
             )}
           </Cell>

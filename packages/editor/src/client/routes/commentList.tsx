@@ -38,6 +38,7 @@ import {useTranslation} from 'react-i18next'
 
 import {DEFAULT_TABLE_PAGE_SIZES, mapTableSortTypeToGraphQLSortOrder} from '../utility'
 import {ApolloCache} from '@apollo/client'
+import {IconButtonTooltip} from '../atoms/iconButtonTooltip'
 
 const {Column, HeaderCell, Cell, Pagination} = Table
 
@@ -284,42 +285,48 @@ export function CommentList() {
             <Cell style={{padding: '6px 0'}}>
               {(rowData: Comment) => (
                 <>
-                  <IconButton
-                    icon={<Icon icon="check" />}
-                    color="green"
-                    circle
-                    size="sm"
-                    style={{marginLeft: '5px'}}
-                    onClick={() => {
-                      setCurrentComment(rowData)
-                      setConfirmAction(ConfirmAction.Approve)
-                      setConfirmationDialogOpen(true)
-                    }}
-                  />
-                  <IconButton
-                    icon={<Icon icon="edit" />}
-                    color="yellow"
-                    circle
-                    size="sm"
-                    style={{marginLeft: '5px'}}
-                    onClick={() => {
-                      setCurrentComment(rowData)
-                      setConfirmAction(ConfirmAction.RequestChanges)
-                      setConfirmationDialogOpen(true)
-                    }}
-                  />
-                  <IconButton
-                    icon={<Icon icon="close" />}
-                    color="red"
-                    circle
-                    size="sm"
-                    style={{marginLeft: '5px'}}
-                    onClick={() => {
-                      setCurrentComment(rowData)
-                      setConfirmAction(ConfirmAction.Reject)
-                      setConfirmationDialogOpen(true)
-                    }}
-                  />
+                  <IconButtonTooltip caption={t('comments.overview.approve')}>
+                    <IconButton
+                      icon={<Icon icon="check" />}
+                      color="green"
+                      circle
+                      size="sm"
+                      style={{marginLeft: '5px'}}
+                      onClick={() => {
+                        setCurrentComment(rowData)
+                        setConfirmAction(ConfirmAction.Approve)
+                        setConfirmationDialogOpen(true)
+                      }}
+                    />
+                  </IconButtonTooltip>
+                  <IconButtonTooltip caption={t('comments.overview.change')}>
+                    <IconButton
+                      icon={<Icon icon="edit" />}
+                      color="yellow"
+                      circle
+                      size="sm"
+                      style={{marginLeft: '5px'}}
+                      onClick={() => {
+                        setCurrentComment(rowData)
+                        setConfirmAction(ConfirmAction.RequestChanges)
+                        setConfirmationDialogOpen(true)
+                      }}
+                    />
+                  </IconButtonTooltip>
+                  <IconButtonTooltip caption={t('comments.overview.reject')}>
+                    <IconButton
+                      icon={<Icon icon="close" />}
+                      color="red"
+                      circle
+                      size="sm"
+                      style={{marginLeft: '5px'}}
+                      onClick={() => {
+                        setCurrentComment(rowData)
+                        setConfirmAction(ConfirmAction.Reject)
+                        setConfirmationDialogOpen(true)
+                      }}
+                    />
+                  </IconButtonTooltip>
                 </>
               )}
             </Cell>

@@ -18,7 +18,11 @@
         "pending": "Pending",
         "published": "Published",
         "publicationDate": "Publication date",
-        "notPublished": "Not yet published"
+        "notPublished": "Not yet published",
+        "unpublish": "Unpublish",
+        "delete": "Delete",
+        "copy": "Copy",
+        "preview": "Preview"
       },
       "panels": {
         "cancel": "Cancel",
@@ -153,7 +157,10 @@
         "loadMore": "Load More",
         "untitled": "Untitled",
         "userName": "User Name",
-        "text": "Text"
+        "text": "Text",
+        "approve": "Approve",
+        "change": "Request changes",
+        "reject": "Reject"
       },
       "panels": {
         "id": "Id",
@@ -202,7 +209,10 @@
         "search": "Search",
         "loadMore": "Load More",
         "noPages": "No Pages found",
-        "notPublished": "Not yet published"
+        "notPublished": "Not yet published",
+        "unpublish": "Unpublish",
+        "delete": "Delete",
+        "copy": "Copy"
       },
       "panels": {
         "unpublish": "Unpublish",
@@ -685,6 +695,7 @@
       "name": "Name",
       "description": "Description",
       "action": "Actions",
+      "delete": "delete",
       "deleteModalTitle": "Delete Member Plan",
       "editTitle": "Edit Member Plan",
       "createTitle": "Create Member Plan",

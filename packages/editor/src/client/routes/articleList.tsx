@@ -20,6 +20,7 @@ import {useTranslation} from 'react-i18next'
 import {FlexboxGrid, Input, InputGroup, Icon, IconButton, Table, Modal, Button} from 'rsuite'
 import {DEFAULT_TABLE_PAGE_SIZES, mapTableSortTypeToGraphQLSortOrder} from '../utility'
 import {ArticlePreviewLinkPanel} from '../panel/articlePreviewLinkPanel'
+import {IconButtonTooltip} from '../atoms/iconButtonTooltip'
 const {Column, HeaderCell, Cell, Pagination} = Table
 
 enum ConfirmAction {
@@ -204,50 +205,59 @@ export function ArticleList() {
               {(rowData: ArticleRefFragment) => (
                 <>
                   {rowData.published && (
-                    <IconButton
-                      icon={<Icon icon="btn-off" />}
-                      circle
-                      size="sm"
-                      onClick={e => {
-                        setCurrentArticle(rowData)
-                        setConfirmAction(ConfirmAction.Unpublish)
-                        setConfirmationDialogOpen(true)
-                      }}
-                    />
+                    <IconButtonTooltip caption={t('articles.overview.unpublish')}>
+                      <IconButton
+                        icon={<Icon icon="btn-off" />}
+                        circle
+                        size="sm"
+                        onClick={e => {
+                          setCurrentArticle(rowData)
+                          setConfirmAction(ConfirmAction.Unpublish)
+                          setConfirmationDialogOpen(true)
+                        }}
+                      />
+                    </IconButtonTooltip>
                   )}
-                  <IconButton
-                    icon={<Icon icon="trash" />}
-                    circle
-                    size="sm"
-                    style={{marginLeft: '5px'}}
-                    onClick={() => {
-                      setCurrentArticle(rowData)
-                      setConfirmAction(ConfirmAction.Delete)
-                      setConfirmationDialogOpen(true)
-                    }}
-                  />
-                  <IconButton
-                    icon={<Icon icon="copy" />}
-                    circle
-                    size="sm"
-                    style={{marginLeft: '5px'}}
-                    onClick={() => {
-                      setCurrentArticle(rowData)
-                      setConfirmAction(ConfirmAction.Duplicate)
-                      setConfirmationDialogOpen(true)
-                    }}
-                  />
-                  {rowData.draft && (
+                  <IconButtonTooltip caption={t('articles.overview.delete')}>
                     <IconButton
-                      icon={<Icon icon="eye" />}
+                      icon={<Icon icon="trash" />}
                       circle
                       size="sm"
                       style={{marginLeft: '5px'}}
                       onClick={() => {
                         setCurrentArticle(rowData)
-                        setArticlePreviewLinkOpen(true)
+                        setConfirmAction(ConfirmAction.Delete)
+                        setConfirmationDialogOpen(true)
                       }}
                     />
+                  </IconButtonTooltip>
+                  <IconButtonTooltip caption={t('articles.overview.copy')}>
+                    <IconButton
+                      icon={<Icon icon="copy" />}
+                      circle
+                      size="sm"
+                      style={{marginLeft: '5px'}}
+                      onClick={() => {
+                        setCurrentArticle(rowData)
+                        setConfirmAction(ConfirmAction.Duplicate)
+                        setConfirmationDialogOpen(true)
+                      }}
+                    />
+                  </IconButtonTooltip>
+
+                  {rowData.draft && (
+                    <IconButtonTooltip caption={t('articles.overview.preview')}>
+                      <IconButton
+                        icon={<Icon icon="eye" />}
+                        circle
+                        size="sm"
+                        style={{marginLeft: '5px'}}
+                        onClick={() => {
+                          setCurrentArticle(rowData)
+                          setArticlePreviewLinkOpen(true)
+                        }}
+                      />
+                    </IconButtonTooltip>
                   )}
                 </>
               )}

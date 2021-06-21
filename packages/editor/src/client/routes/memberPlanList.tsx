@@ -36,6 +36,7 @@ import {
   useMemberPlanListQuery
 } from '../api'
 import {MemberPlanEditPanel} from '../panel/memberPlanEditPanel'
+import {IconButtonTooltip} from '../atoms/iconButtonTooltip'
 const {Column, HeaderCell, Cell /*, Pagination */} = Table
 
 export function MemberPlanList() {
@@ -145,16 +146,18 @@ export function MemberPlanList() {
           <Cell style={{padding: '6px 0'}}>
             {(rowData: FullMemberPlanFragment) => (
               <>
-                <IconButton
-                  icon={<Icon icon="trash" />}
-                  circle
-                  size="sm"
-                  style={{marginLeft: '5px'}}
-                  onClick={() => {
-                    setConfirmationDialogOpen(true)
-                    setCurrentMemberPlan(rowData)
-                  }}
-                />
+                <IconButtonTooltip caption={t('memberPlanList.delete')}>
+                  <IconButton
+                    icon={<Icon icon="trash" />}
+                    circle
+                    size="sm"
+                    style={{marginLeft: '5px'}}
+                    onClick={() => {
+                      setConfirmationDialogOpen(true)
+                      setCurrentMemberPlan(rowData)
+                    }}
+                  />
+                </IconButtonTooltip>
               </>
             )}
           </Cell>
