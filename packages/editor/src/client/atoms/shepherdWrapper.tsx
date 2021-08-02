@@ -1,6 +1,12 @@
 import React, {ReactNode, useEffect, useState} from 'react'
 import {ShepherdTour} from 'react-shepherd'
-import {options, versionOneSteps, versionTwoSteps, versionThreeSteps} from './tourSteps'
+import {
+  options,
+  versionOneSteps,
+  versionTwoSteps,
+  versionThreeSteps,
+  TourStartPoints
+} from './tourSteps'
 
 export const TourContext = React.createContext<any>({})
 
@@ -14,6 +20,8 @@ const tourListMapper: any = {
   '2': versionTwoSteps,
   '3': versionThreeSteps
 }
+
+const newestTour = TourStartPoints.Initial
 
 export function ShepherdWrapper({children}: ShepherdWrapperProps) {
   const [tourVersion, setTourVersion] = useState<string>(localStorage.getItem('tourVersion') || '1')

@@ -24,6 +24,7 @@ import {
 import {useTranslation} from 'react-i18next'
 import {ShepherdTourContext} from 'react-shepherd'
 import {TourContext} from './atoms/shepherdWrapper'
+import {TourStartPoints} from './atoms/tourSteps'
 
 export interface BaseProps {
   children?: ReactNode
@@ -77,7 +78,8 @@ export function Base({children}: BaseProps) {
 
   useEffect(() => {
     if (tourVersion) {
-      tour?.start()
+      tour?.show(tourVersion.step, true)
+      // tour?.start()
     }
   }, [])
 
@@ -210,8 +212,9 @@ export function Base({children}: BaseProps) {
                     // check context
                     // change tour
                     onSelect={() => {
-                      setTourVersion('3')
-                      tour?.start()
+                      // setTourVersion('3')
+                      tour?.show(TourStartPoints.Commenting, true)
+                      // tour?.start()
                     }}>
                     {t('guideTour.start.third.tour')}
                   </Dropdown.Item>

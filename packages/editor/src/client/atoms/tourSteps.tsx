@@ -16,8 +16,14 @@ const navButtons = {
   }
 }
 
+export enum TourStartPoints {
+  Initial = 'inital',
+  Commenting = 'commenting'
+}
+
 export const versionOneSteps: Step.StepOptions[] = [
   {
+    id: TourStartPoints.Initial,
     buttons: [navButtons.exit, navButtons.next],
     // classes: 'custom-class-name-1 custom-class-name-2',
     title: 'Welcome to We.Publish Editor!',
