@@ -22,9 +22,8 @@ import {
 } from './route'
 
 import {useTranslation} from 'react-i18next'
+import {TourStartPoints, tourSteps} from './atoms/tourSteps'
 import {ShepherdTourContext} from 'react-shepherd'
-import {TourContext} from './atoms/shepherdWrapper'
-import {TourStartPoints} from './atoms/tourSteps'
 
 export interface BaseProps {
   children?: ReactNode
@@ -73,13 +72,12 @@ export function Base({children}: BaseProps) {
     i18n.changeLanguage(uiLanguage)
   }, [uiLanguage])
 
+  const [tourVersion, setTourVersion] = useState<string>(localStorage.getItem('tourVersion') ?? '')
   const tour = useContext(ShepherdTourContext)
-  const {tourVersion, setTourVersion} = useContext(TourContext)
 
   useEffect(() => {
-    if (tourVersion) {
-      tour?.show(tourVersion.step, true)
-      // tour?.start()
+    if (!tourVersion) {
+      tour?.addSteps(tourSteps).show()
     }
   }, [])
 
@@ -205,7 +203,9 @@ export function Base({children}: BaseProps) {
                   <Dropdown.Item
                     // check context
                     // change tour
-                    onSelect={tour?.start}>
+                    onSelect={() => {
+                      tour?.show(TourStartPoints.Initial, true)
+                    }}>
                     {t('guideTour.startTour')}
                   </Dropdown.Item>
                   <Dropdown.Item
@@ -213,7 +213,7 @@ export function Base({children}: BaseProps) {
                     // change tour
                     onSelect={() => {
                       // setTourVersion('3')
-                      tour?.show(TourStartPoints.Commenting, true)
+                      // tour?.show(TourStartPoints.Commenting, true)
                       // tour?.start()
                     }}>
                     {t('guideTour.start.third.tour')}

@@ -18,32 +18,40 @@ const navButtons = {
 
 export enum TourStartPoints {
   Initial = 'inital',
+  Articles = 'articles',
+  Pages = 'pages',
   Commenting = 'commenting'
 }
 
-export const versionOneSteps: Step.StepOptions[] = [
+export const tourSteps: Step.StepOptions[] = [
+  /* Initial */
   {
     id: TourStartPoints.Initial,
-    buttons: [navButtons.exit, navButtons.next],
-    // classes: 'custom-class-name-1 custom-class-name-2',
-    title: 'Welcome to We.Publish Editor!',
-    text: ['Get a guided tour of the editor'],
+    buttons: [
+      navButtons.exit,
+      navButtons.next,
+      {
+        label: 'custom',
+        text: 'custom',
+
+        action: () => {
+          console.log('custom')
+          // .show(TourStartPoints.Pages)
+        }
+      }
+    ],
     when: {
       show: () => {
-        localStorage.setItem('tourVersion', '1')
+        localStorage.setItem('tourVersion', TourStartPoints.Initial)
       }
-    }
-    /*   when: {
-               show: () => {
-                   console.log('show step')
-               },
-               hide: () => {
-                   console.log('hide stepShepherd.Tour(options)')
-               }
-           }
-        */
+    },
+    title: 'Welcome to We.Publish Editor!',
+    text: ['Get a guided tour of the editor']
   },
+
+  /* Articles */
   {
+    id: TourStartPoints.Articles,
     buttons: [navButtons.back],
     title: 'click on articles',
     text: ['go to articles tab'],
@@ -92,30 +100,14 @@ export const versionOneSteps: Step.StepOptions[] = [
     buttons: [navButtons.back, navButtons.next],
     title: 'Write something',
     text: ['(options...)']
-  }
-]
+  },
 
-export const testSteps: Step.StepOptions[] = [
+  /* Pages */
   {
+    id: TourStartPoints.Pages,
     buttons: [navButtons.exit, navButtons.next],
-    title: 'test steps',
-    text: ['added in  base']
-  }
-]
-
-export const versionTwoSteps: Step.StepOptions[] = [
-  {
-    buttons: [navButtons.exit, navButtons.next],
-    title: 'Welcome back',
-    text: ['Second time user']
-  }
-]
-
-export const versionThreeSteps: Step.StepOptions[] = [
-  {
-    buttons: [navButtons.exit, navButtons.next],
-    title: 'Welcome back again!',
-    text: ['Third time user']
+    title: 'Pages tour',
+    text: ['this is the pages tour']
   }
 ]
 

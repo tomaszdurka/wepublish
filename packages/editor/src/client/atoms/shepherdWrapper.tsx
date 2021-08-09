@@ -1,41 +1,22 @@
-import React, {ReactNode, useEffect, useState} from 'react'
+import React, {ReactNode, useState} from 'react'
 import {ShepherdTour} from 'react-shepherd'
-import {
-  options,
-  versionOneSteps,
-  versionTwoSteps,
-  versionThreeSteps,
-  TourStartPoints
-} from './tourSteps'
+import {options, tourSteps, TourStartPoints} from './tourSteps'
 
 export const TourContext = React.createContext<any>({})
 
 export interface ShepherdWrapperProps {
   children?: ReactNode
-  tourVersion: number
+  tourVersion: string
 }
-
-const tourListMapper: any = {
-  '1': versionOneSteps,
-  '2': versionTwoSteps,
-  '3': versionThreeSteps
-}
-
-const newestTour = TourStartPoints.Initial
 
 export function ShepherdWrapper({children}: ShepherdWrapperProps) {
-  const [tourVersion, setTourVersion] = useState<string>(localStorage.getItem('tourVersion') || '1')
-  const [currentTourSteps, setCurrentTourSteps] = useState<any>(versionOneSteps)
-
-  useEffect(() => {
-    const currentVersionSteps = tourListMapper[tourVersion] ?? versionOneSteps
-
-    setCurrentTourSteps(currentVersionSteps)
-  }, [tourVersion])
+  const [tourVersion, setTourVersion] = useState<string>(
+    localStorage.getItem('tourVersion') || TourStartPoints.Initial
+  )
 
   return (
-    <TourContext.Provider value={{tourVersion, setTourVersion, currentTourSteps}}>
-      <ShepherdTour steps={currentTourSteps} tourOptions={options}>
+    <TourContext.Provider value={{tourVersion, setTourVersion}}>
+      <ShepherdTour steps={tourSteps} tourOptions={options}>
         {children}
       </ShepherdTour>
     </TourContext.Provider>
