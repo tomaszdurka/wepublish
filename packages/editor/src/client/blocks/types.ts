@@ -15,7 +15,8 @@ import {
   PeerRefFragment,
   PageRefFragment,
   TeaserStyle,
-  TeaserInput
+  TeaserInput,
+  GridItemInput
 } from '../api'
 
 export enum BlockType {
@@ -208,11 +209,15 @@ export interface TeaserGridBlockValue {
 
 export type FlexItemLayout = Omit<Layout, 'i'>
 
+export interface GridItemValue {
+  teaser: Teaser | null
+  layout: FlexItemLayout
+}
+
 export interface TeaserFlexGridBlockValue {
   // REMARK: intentionally not extending TeaserGridBLockValue, don't know what
   // the string is good for where lateron nanoid() is inserted ...
-  teasers: (Teaser | null)[]
-  layout: FlexItemLayout[]
+  gridItems: GridItemInput[]
   numColumns: number
   numRows: number
 }
@@ -312,8 +317,9 @@ export function unionMapForBlock(block: BlockValue): BlockInput {
     case BlockType.TeaserFlexGrid:
       return {
         teaserFlexGrid: {
-          teasers: block.value.teasers.map(value => getTeaserForType(value)),
-          layout: block.value.layout,
+          // teasers: block.value.teasers.map(value => getTeaserForType(value)),
+          // layout: block.value.layout,
+          gridItems: block.value.gridItems,
           numColumns: block.value.numColumns,
           numRows: block.value.numRows
         }

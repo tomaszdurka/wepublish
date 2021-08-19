@@ -121,14 +121,14 @@ export const BlockMap: BlockMapForValue<BlockValue> = {
   [BlockType.TeaserFlexGrid]: {
     field: props => <TeaserFlexGridBlock {...props} />,
     defaultValue: {
-      numColumns: 12,
+      numColumns: 22,
       numRows: 30,
-      layout: [
-        {x: 0, y: 0, w: 12, h: 5},
-        {x: 0, y: Infinity, w: 5, h: 6},
-        {x: 6, y: Infinity, w: 5, h: 4}
-      ],
-      teasers: [null, null, null]
+      gridItems: [
+        {
+          layout: {x: 0, y: 0, w: 12, h: 5},
+          teaser: null
+        }
+      ]
     },
     label: 'Flex Grid',
     icon: 'squares'
