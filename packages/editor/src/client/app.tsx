@@ -1,5 +1,5 @@
 import {hot} from 'react-hot-loader/root'
-import React from 'react'
+import React, {useState} from 'react'
 
 import 'rsuite/lib/styles/index.less'
 
@@ -24,6 +24,11 @@ import {PaymentMethodList} from './routes/paymentMethodList'
 import {NavigationList} from './routes/navigationList'
 
 import './global.less'
+import {IntlProvider} from 'rsuite'
+import enGB from 'rsuite/lib/IntlProvider/locales/en_GB'
+/* import i18n from "i18next";
+import { RouteContextState } from "@wepublish/karma.run-react"; */
+import {useTranslation} from 'react-i18next'
 
 export function contentForRoute(route: Route) {
   switch (route.type) {
@@ -92,9 +97,7 @@ export function contentForRoute(route: Route) {
   return null
 }
 
-export function App() {
-  const {current} = useRoute()
-
+function GetComponents(current: any) {
   if (current) {
     switch (current.type) {
       case RouteType.Login:
@@ -120,6 +123,21 @@ export function App() {
   }
 
   return null
+}
+
+export function App() {
+  const {current} = useRoute()
+
+  const {i18n} = useTranslation()
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  const [lng, setLang] = useState<object>(enGB)
+
+  i18n.on('languageChanged', lng => {
+    // get proper locale
+    setLang(lng)
+  })
+
+  return <IntlProvider locale={lng}>{GetComponents(current)}</IntlProvider>
 }
 
 export const HotApp = hot(App)
